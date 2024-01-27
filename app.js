@@ -11,12 +11,16 @@ app.use(express.static('public'));
 app.set('views', __dirname + '/public');
 app.engine('html', require('ejs').renderFile);
 
+app.get('/', function (req, res){
+    res.send('Welcome to Discover Kashmir');
+});
 
 app.get('/about', function (req, res){
     	res.render('dataFrom.html');
 });
 
 app.post('/ccavRequestHandler', function (request, response){
+    // cc
 	ccavReqHandler.postReq(request, response);
 });
 
