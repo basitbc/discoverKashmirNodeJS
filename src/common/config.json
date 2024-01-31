@@ -1,0 +1,8 @@
+{
+  "SMTP": {
+    "host": "smtp.gmail.com",
+    "port": 587,
+    "username": "bbchanna@gmail.com",
+    "password": "your-password"
+  }
+}

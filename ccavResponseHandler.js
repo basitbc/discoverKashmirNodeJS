@@ -1,13 +1,12 @@
 var http = require('http'),
     fs = require('fs'),
-    ccav = require('./ccavutil.js'),
+    ccav = require('./src/utils/ccavutil.js'),
     qs = require('querystring');
 
 exports.postRes = function(request,response){
     var ccavEncResponse='',
 	ccavResponse='',	
-	// workingKey = '828078A3C7E40E8582EA9CDD0E0A8831',	//Put in the 32-Bit key shared by CCAvenues.
-	workingKey = '7AD18F22AF9F5000FA9085372B0601C2',	//Put in the 32-Bit key shared by CCAvenues.
+	workingKey = '1AEDA6A1892A51BF89D7F5566BF91E20',	//Put in the 32-Bit key shared by CCAvenues.
 	ccavPOST = '';
 	
         request.on('data', function (data) {

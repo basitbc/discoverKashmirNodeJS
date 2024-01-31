@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            width: 80%;
+            max-width: 600px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: -10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form method="POST" name="customerData" action="/ccavRequestHandler">
+        <h2>Please enter your Details</h2>
+
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="duration">Duration</label>
+        <input type="text" id="duration" name="duration" required>
+
+        <label for="packageDetails">Package Details (No of Nights/Days)</label>
+        <input type="text" id="packageDetails" name="packageDetails" required>
+
+        <label for="amount">Amount to Pay</label>
+        <input type="text" id="amount" name="amount" required>
+
+        <label for="currency">Currency</label>
+        <select id="currency" name="currency" required>
+            <option value="INR">Indian Rupee (INR)</option>
+            <option value="USD">United States Dollar (USD)</option>
+            <option value="SGD">Singapore Dollar (SGD)</option>
+            <option value="GBP">Pound Sterling (GBP)</option>
+            <option value="EUR">Euro (EUR)</option>
+        </select>
+
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="state">State/Province/Region</label>
+        <input type="text" id="state" name="state">
+
+        <label for="zip">Zip / Postal code</label>
+        <input type="text" id="zip" name="zip" required>
+
+        <label for="country">Country</label>
+        <input type="text" id="country" name="country" required>
+
+        <button type="submit">Pay Now</button>
+
+        <p class="error-message" id="errorMessage"></p>
+    </form>
+
+    <script>
+        document.getElementById("paymentForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            if (validateForm()) {
+                // All fields are valid, proceed with submission (call your NodeJS endpoint here)
+                alert("Payment successful!");
+            } else {
+                // Some fields are empty, show an error message
+                document.getElementById("errorMessage").innerText = 'Please fill out all required fields.';
+            }
+        });
+
+        function validateForm() {
+            var form = document.getElementById("paymentForm");
+            var isValid = true;
+
+            // Reset error message
+            document.getElementById("errorMessage").innerText = '';
+
+            // Check each required input/select
+            for (var i = 0; i < form.elements.length; i++) {
+                if (form.elements[i].hasAttribute("required") && form.elements[i].value.trim() === '') {
+                    isValid = false;
+                    // Show error message for the first empty required field
+                    document.getElementById("errorMessage").innerText = 'Field is required';
+                    break;
+                }
+            }
+
+            return isValid;
+        }
+    </script>
+
+</body>
+
+</html>
